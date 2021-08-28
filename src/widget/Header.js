@@ -1,19 +1,25 @@
 import React from 'react';
-import {Nav, Navbar, Container} from 'react-bootstrap';
+import {Nav, Navbar, Container, Card} from 'react-bootstrap';
 import '../css/header.css';
 
 class Header extends React.Component {
+   
+
+   
     render(){
+        
         return(
-            <Navbar  collapseOnSelect expand="lg"  variant="light">
+            <>
+            <Navbar  collapseOnSelect expand="lg"  variant="light" >
                 <Container>
-                    <Navbar.Brand href="/">STEEM-CONTEST</Navbar.Brand>
+                    <Navbar.Brand href="/">STEEMCONTEST</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                         <Nav.Link href="/new">New</Nav.Link>
+                        <Nav.Link href="/endsoon">Ended Soon</Nav.Link>
                         <Nav.Link href="/hight">High Prize</Nav.Link>
-                        <Nav.Link href="/ended">Ended Soon</Nav.Link>
+                        
                         
                         </Nav>
                         <Nav>
@@ -23,7 +29,14 @@ class Header extends React.Component {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            
+
+            <Card className="jumbotron">
+                <Card.Body className="text-center">
+                    <h1 className="jumbotitle">STEEMCONTEST</h1>
+                    <small >a platform that provide all contest informations on steemit</small>
+                </Card.Body>
+            </Card>
+            </>
         )
     }
 }

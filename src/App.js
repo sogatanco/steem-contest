@@ -2,6 +2,8 @@ import './App.css';
 import Header  from './widget/Header'; 
 import Home from './pages/Home';
 import Add from './pages/Add';
+import New from './pages/New';
+import Endsoon from './pages/Endsoon';
 import {
   Switch,
   Route,
@@ -10,6 +12,7 @@ import {
 
 
 function App() {
+
   return (
     <>
     <BrowserRouter>
@@ -18,6 +21,8 @@ function App() {
        <Switch>
           <Route path="/" exact component={Home}/>
           <Route path="/add" exact component={Add}/> 
+          <Route path="/new" exact component={New}/> 
+          <Route path="/endsoon" exact component={Endsoon}/> 
         </Switch>
 
     </BrowserRouter>

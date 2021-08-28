@@ -3,10 +3,7 @@ import {Container, Row, Col, Card, Badge, Dropdown, DropdownButton} from 'react-
 import '../css/home.css';
 import firebase from '../firebaseConfig';
 
-
-
-class Home extends React.Component{
-
+class New extends React.Component{
     constructor(){
         super();
         this.state={
@@ -22,7 +19,7 @@ class Home extends React.Component{
         var db=firebase.firestore().collection('/contests')
         .where("category","==", cat)
         .where("status","==", "paid")
-        .orderBy('added', 'desc');
+        .orderBy('end', 'desc');
         db.get().then(contest=>{
             var dataall=[];
             contest.docs.forEach(s=>{
@@ -57,7 +54,7 @@ class Home extends React.Component{
 
     getData(){
         var db=firebase.firestore().collection('/contests')
-        .orderBy('added', 'desc')
+        .orderBy('end', 'desc')
         .where("status","==", "paid")
 
         db.get().then(contest=>{
@@ -191,7 +188,7 @@ class Home extends React.Component{
             </>
         )
     }
+
 }
 
-export default Home;
-
+export default New;
