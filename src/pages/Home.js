@@ -150,7 +150,7 @@ class Home extends React.Component{
 
                    {this.state.contests.map((c)=>
                         <Col xs={12} md={4} lg={3} key={c.id} onClick={() =>this.redirect(c.link)}>
-                        <Card >
+                        <Card  className="contes">
                             <Card.Img variant="top" src={c.thumbnail} className="img"/>
                             <Card.Body>
                                 <Card.Text className="text-capitalize title">{c.title}</Card.Text>

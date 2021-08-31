@@ -3,7 +3,7 @@ import {Container, Row, Col, Card, Badge, Dropdown, DropdownButton} from 'react-
 import '../css/home.css';
 import firebase from '../firebaseConfig';
 
-class New extends React.Component{
+class Expired extends React.Component{
     constructor(){
         super();
         this.state={
@@ -18,7 +18,7 @@ class New extends React.Component{
         this.setState({category:cat})
         var db=firebase.firestore().collection('/contests')
         .where("category","==", cat)
-        .where("status","==", "paid")
+        .where("status","==", "ended")
         .orderBy('end', 'desc');
         db.get().then(contest=>{
             var dataall=[];
@@ -55,13 +55,14 @@ class New extends React.Component{
     getData(){
         var db=firebase.firestore().collection('/contests')
         .orderBy('end', 'desc')
-        .where("status","==", "paid")
+        .where("status","==", "ended")
 
         db.get().then(contest=>{
             var dataall=[];
             contest.docs.forEach(s=>{
                 var now=new Date();
                 var inday=(s.data().end.toDate().getTime() - now.getTime() ) / (1000 * 3600 * 24)
+                // console.log(s.data().end.toDate().getTime()- new Date.toDate().getTime())
                 dataall.push({'prize':s.data().prize, 'end':inday, 'title':s.data().title, 'thumbnail':s.data().thumbnail, 'id':s.data().id, 'link':s.data().link, 'user':s.data().user, 'category':s.data().category})
             })
             this.setState({contests:dataall})
@@ -190,4 +191,4 @@ class New extends React.Component{
 
 }
 
-export default New;
+export default Expired;

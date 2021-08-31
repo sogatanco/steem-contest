@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Add from './pages/Add';
 import New from './pages/New';
 import Endsoon from './pages/Endsoon';
+import Expired from './pages/Expired'
 import {
   Switch,
   Route,
@@ -23,6 +24,7 @@ function App() {
           <Route path="/add" exact component={Add}/> 
           <Route path="/new" exact component={New}/> 
           <Route path="/endsoon" exact component={Endsoon}/> 
+          <Route path="/expired" exact component={Expired}/> 
         </Switch>
 
     </BrowserRouter>

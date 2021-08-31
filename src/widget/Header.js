@@ -12,12 +12,20 @@ class Header extends React.Component {
             <>
             <Navbar  collapseOnSelect expand="lg"  variant="light" >
                 <Container>
-                    <Navbar.Brand href="/">STEEMCONTEST</Navbar.Brand>
+                    <Navbar.Brand href="/">
+                        <img
+                            src="../logo.png"
+                            height="50"
+                            className="d-inline-block align-top"
+                            alt="React Bootstrap logo"
+                        />
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                         <Nav.Link href="/new">New</Nav.Link>
                         <Nav.Link href="/endsoon">Ended Soon</Nav.Link>
+                        <Nav.Link href="/expired">Expired Contests</Nav.Link>
                         <Nav.Link href="/hight">High Prize</Nav.Link>
                         
                         
