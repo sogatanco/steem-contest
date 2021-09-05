@@ -13,10 +13,6 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 
 
-
-
-
-
 class Add extends React.Component{
 
     constructor (props) {
@@ -99,14 +95,26 @@ class Add extends React.Component{
       onChangeLink(event){
           var link=event.target.value;
           if(link.startsWith('https://steemit.com/')){
-            this.setState({linkChek:false})
-              this.setState({link:event.target.value})
 
-              var link1=link.split('https://steemit.com/')[1]
-              this.setState({permalink:link1.split('/')[2]})
+            var db=firebase.firestore().collection('/contests').where('link', '==',event.target.value);
+            db.get().then(contests=>{
+                if(contests.docs.length>0){
+                    this.setState({linkChek:true})
+                    alert('link has added before')
+                }else{
+                    this.setState({linkChek:false})
+                    this.setState({link:event.target.value})
 
-              var user=link1.split('/')[1];
-              this.setState({user:user.split('@')[1]})
+                    var link1=link.split('https://steemit.com/')[1]
+                    this.setState({permalink:link1.split('/')[2]})
+
+                    var user=link1.split('/')[1];
+                    this.setState({user:user.split('@')[1]})
+                }
+            })
+            
+
+           
           }else{
             this.setState({linkChek:true})
               
