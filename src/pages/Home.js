@@ -76,7 +76,7 @@ class Home extends React.Component{
     }
 
     vote(author1, permlink1){
-        const key = PrivateKey.from('5JyfNUFWGwgcmEHGdA565Ph8hszy35Pi8kFyekkPGR4huaZakXo')
+        const key = PrivateKey.from('PRIVATE KEY')
         const voter='steemcontest.com';
         const author=author1;
         const permlink=permlink1;
