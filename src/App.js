@@ -1,5 +1,6 @@
 import './App.css';
 import Header  from './widget/Header'; 
+import Footer  from './widget/Footer'; 
 import Home from './pages/Home';
 import Add from './pages/Add';
 import New from './pages/New';
@@ -28,6 +29,7 @@ function App() {
         </Switch>
 
     </BrowserRouter>
+    <Footer></Footer>
       
     </>
   );

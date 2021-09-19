@@ -53,8 +53,6 @@ class Add extends React.Component{
                 method: 'POST'
                 }).then(response=>response.json())
                 .then((data)=>{
-
-                    console.log(data.result.title)
                     console.log(JSON.parse(data.result.json_metadata).image[0])
 
                     var db=firebase.firestore().collection('/contests');
@@ -125,7 +123,7 @@ class Add extends React.Component{
     render(){
         return(
             <>
-                <Container className="add">
+                <Container  className="pb-5 add">
 
                     <Card>
                         <Card.Body>

@@ -3,6 +3,8 @@ import {Container, Row, Col, Card, Badge, Dropdown, DropdownButton} from 'react-
 import '../css/home.css';
 import firebase from '../firebaseConfig';
 
+import { Client, PrivateKey } from 'dsteem';
+
 
 
 class Home extends React.Component{
@@ -73,7 +75,35 @@ class Home extends React.Component{
         })
     }
 
+    vote(author1, permlink1){
+        const key = PrivateKey.from('5JyfNUFWGwgcmEHGdA565Ph8hszy35Pi8kFyekkPGR4huaZakXo')
+        const voter='steemcontest.com';
+        const author=author1;
+        const permlink=permlink1;
+        const weight=10000;
+        const client = new Client('https://api.steemit.com');
+        const vote = {
+            voter,
+            author,
+            permlink,
+            weight, //needs to be an integer for the vote function
+        };
+
+        client.broadcast.vote(vote, key).then(
+            function(result) {
+              console.log(result)
+            },
+            function(error) {
+                console.log('error:', error);
+               
+            }
+        );
+    }
+
     checkPaid(){
+        
+    
+        
         var db=firebase.firestore().collection('/contests').where("status","==", "unpaid");
         db.get().then(contest=>{
             contest.docs.forEach(c=>{
@@ -86,6 +116,7 @@ class Home extends React.Component{
                             arr.forEach(a=>{
                                 if(a[4]===c.data().link){
                                     console.log('yes')
+                                    this.vote(c.data().user, c.data().permalink);
                                     var db=firebase.firestore().collection('/contests');
                                     db.doc(c.data().id).update({
                                         status:'paid'
@@ -125,7 +156,7 @@ class Home extends React.Component{
             <>
             
             
-            <Container>
+            <Container className="pb-5">
 
                 <DropdownButton id="dropdown-basic-button" title={this.state.category}  variant="warning" size="sm" className="mt-4 d-flex  justify-content-end">
                     <Dropdown.Item onClick={()=>this.getCat('promo-steem')}>Promo-Steem</Dropdown.Item>

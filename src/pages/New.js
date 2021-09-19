@@ -121,7 +121,7 @@ class New extends React.Component{
             <>
             
             
-            <Container>
+            <Container className="pb-5">
 
                 <DropdownButton id="dropdown-basic-button" title={this.state.category}  variant="warning" size="sm" className="mt-4 d-flex  justify-content-end">
                     <Dropdown.Item onClick={()=>this.getCat('promo-steem')}>Promo-Steem</Dropdown.Item>
