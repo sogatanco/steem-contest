@@ -76,7 +76,7 @@ class Home extends React.Component{
     }
 
     vote(author1, permlink1){
-        const key = PrivateKey.from('PRIVATE KEY')
+        const key = PrivateKey.from('POSTING_KEY')
         const voter='steemcontest.com';
         const author=author1;
         const permlink=permlink1;
@@ -100,6 +100,35 @@ class Home extends React.Component{
         );
     }
 
+    resteem(author1, permlink1){
+        const key = PrivateKey.from('POSTING_KEY')
+        const client = new Client('https://api.steemit.com');
+        const jsonOp = JSON.stringify([
+            'reblog',
+            {
+                account: 'steemcontest.com',
+                author: author1,
+                permlink: permlink1,
+            },
+        ]);
+        
+        const data = {
+            id: 'follow',
+            json: jsonOp,
+            required_auths: [],
+            required_posting_auths: ['steemcontest.com'],
+        };
+        
+        client.broadcast.json(data, key).then(
+            function(result) {
+                console.log('client broadcast result: ', result);
+            },
+            function(error) {
+                console.error(error);
+            }
+        );
+    }
+
     checkPaid(){
         
     
@@ -117,6 +146,7 @@ class Home extends React.Component{
                                 if(a[4]===c.data().link){
                                     console.log('yes')
                                     this.vote(c.data().user, c.data().permalink);
+                                    this.resteem(c.data().user, c.data().permalink);
                                     var db=firebase.firestore().collection('/contests');
                                     db.doc(c.data().id).update({
                                         status:'paid'
