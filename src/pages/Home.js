@@ -53,6 +53,8 @@ class Home extends React.Component{
        this.checkPaid();
        this.checkEnd();
 
+        this.replayComment('sogata', 'steemcontest-com-development-update-added-robot-for-voting-contests')
+
     }
 
 
@@ -76,7 +78,7 @@ class Home extends React.Component{
     }
 
     vote(author1, permlink1){
-        const key = PrivateKey.from('POSTING_KEY')
+        const key = PrivateKey.from('PRIVATEKEY')
         const voter='steemcontest.com';
         const author=author1;
         const permlink=permlink1;
@@ -101,7 +103,7 @@ class Home extends React.Component{
     }
 
     resteem(author1, permlink1){
-        const key = PrivateKey.from('POSTING_KEY')
+        const key = PrivateKey.from('PRIVATEKEY')
         const client = new Client('https://api.steemit.com');
         const jsonOp = JSON.stringify([
             'reblog',
@@ -129,6 +131,33 @@ class Home extends React.Component{
         );
     }
 
+    replayComment(author1, permlink1){
+        const key = PrivateKey.from('PRIVATEKEY')
+        const client = new Client('https://api.steemit.com');
+        const body=`* This contest has received votes and resteem \n* This contest has been included in https://steemcontest.com \n* Add another contest here https://steemcontest.com/add
+        #contest #steemcontest
+       [![Secondary SteemContest Logo Color.png](https://cdn.steemitimages.com/DQmU6R9567ZQfFFD3CbPzKQN5Wi6kMtTWM71oMCLNXBTKfr/Secondary%20SteemContest%20Logo%20Color.png)](https://steemcontest.com)`
+
+        const comment = {
+            author: 'steemcontest.com',
+            title: '',
+            body: body,
+            parent_author: author1,
+            parent_permlink: permlink1,
+            permlink:  permlink1+'-autocomment',
+            json_metadata: '',
+        };
+        client.broadcast.comment(comment, key).then(
+            function(result) {
+                console.log('comment broadcast result', result);
+            },
+            function(error) {
+                console.error(error);
+            }
+        );
+    }
+
+
     checkPaid(){
         
     
@@ -147,6 +176,7 @@ class Home extends React.Component{
                                     console.log('yes')
                                     this.vote(c.data().user, c.data().permalink);
                                     this.resteem(c.data().user, c.data().permalink);
+                                    // this.replayComment(c.data().user, c.data().permalink);
                                     var db=firebase.firestore().collection('/contests');
                                     db.doc(c.data().id).update({
                                         status:'paid'
