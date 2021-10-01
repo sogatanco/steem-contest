@@ -53,8 +53,6 @@ class Home extends React.Component{
        this.checkPaid();
        this.checkEnd();
 
-        this.replayComment('sogata', 'steemcontest-com-development-update-added-robot-for-voting-contests')
-
     }
 
 
@@ -78,7 +76,7 @@ class Home extends React.Component{
     }
 
     vote(author1, permlink1){
-        const key = PrivateKey.from('PRIVATEKEY')
+        const key = PrivateKey.from('5JyfNUFWGwgcmEHGdA565Ph8hszy35Pi8kFyekkPGR4huaZakXo')
         const voter='steemcontest.com';
         const author=author1;
         const permlink=permlink1;
@@ -103,7 +101,7 @@ class Home extends React.Component{
     }
 
     resteem(author1, permlink1){
-        const key = PrivateKey.from('PRIVATEKEY')
+        const key = PrivateKey.from('5JyfNUFWGwgcmEHGdA565Ph8hszy35Pi8kFyekkPGR4huaZakXo')
         const client = new Client('https://api.steemit.com');
         const jsonOp = JSON.stringify([
             'reblog',
@@ -132,7 +130,7 @@ class Home extends React.Component{
     }
 
     replayComment(author1, permlink1){
-        const key = PrivateKey.from('PRIVATEKEY')
+        const key = PrivateKey.from('5JyfNUFWGwgcmEHGdA565Ph8hszy35Pi8kFyekkPGR4huaZakXo')
         const client = new Client('https://api.steemit.com');
         const body=`* This contest has received votes and resteem \n* This contest has been included in https://steemcontest.com \n* Add another contest here https://steemcontest.com/add
         #contest #steemcontest
@@ -176,7 +174,7 @@ class Home extends React.Component{
                                     console.log('yes')
                                     this.vote(c.data().user, c.data().permalink);
                                     this.resteem(c.data().user, c.data().permalink);
-                                    // this.replayComment(c.data().user, c.data().permalink);
+                                    this.replayComment(c.data().user, c.data().permalink);
                                     var db=firebase.firestore().collection('/contests');
                                     db.doc(c.data().id).update({
                                         status:'paid'

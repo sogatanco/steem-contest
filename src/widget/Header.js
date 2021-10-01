@@ -31,6 +31,7 @@ class Header extends React.Component {
                         
                         </Nav>
                         <Nav>
+                        <Nav.Link href="/delegator">Delegators</Nav.Link>
                         <Nav.Link href="/add">Add Your Contest Here</Nav.Link>
                         
                         </Nav>
